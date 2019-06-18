@@ -39,11 +39,21 @@ AddressBook.prototype.deleteContact = function(id) {
 }
 
 // Business Logic for Contacts ---------
-function Contact(firstName, lastName, phoneNumber) {
+function Contact(firstName, lastName, phoneNumber, email, home, work) {
   this.firstName = firstName,
   this.lastName = lastName,
-  this.phoneNumber = phoneNumber
+  this.phoneNumber = phoneNumber,
+  // this.addresses = Addresses
+  this.email = email,
+  this.home = home,
+  this.work = work
 }
+
+// function Addresses(email, home, work) {
+//   this.email = email,
+//   this.home = home,
+//   this.work = work
+// }
 
 Contact.prototype.fullName = function() {
   return this.firstName + " " + this.lastName;
@@ -67,6 +77,9 @@ function showContact(contactId) {
   $(".first-name").html(contact.firstName);
   $(".last-name").html(contact.lastName);
   $(".phone-number").html(contact.phoneNumber);
+  $(".email").html(contact.email);
+  $(".home").html(contact.home);
+  $(".work").html(contact.work);
   var buttons = $("#buttons");
   buttons.empty();
   buttons.append("<button class='deleteButton' id=" +  + contact.id + ">Delete</button>");
@@ -90,12 +103,18 @@ $(document).ready(function() {
     var inputtedFirstName = $("input#new-first-name").val();
     var inputtedLastName = $("input#new-last-name").val();
     var inputtedPhoneNumber = $("input#new-phone-number").val();
+    var inputtedEmail = $("input#new-email").val();
+    var inputtedHome = $("input#new-home").val();
+    var inputtedWork = $("input#new-work").val();
 
     $("input#new-first-name").val("");
     $("input#new-last-name").val("");
     $("input#new-phone-number").val("");
+    $("input#new-email").val("");
+    $("input#new-home").val("");
+    $("input#new-work").val("");
 
-    var newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber);
+    var newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, inputtedEmail, inputtedHome, inputtedWork);
     addressBook.addContact(newContact);
     displayContactDetails(addressBook);
   })
